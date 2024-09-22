@@ -8,18 +8,19 @@ namespace Test_project.scripts{
 
 		public override void _Ready()
 		{
-			NewGame();
+			GetNode<Player>("Player").Hide();
 		}
 
 		public void GameOver()
 		{
-			GD.Print("GAME OVER");
 			GetNode<Timer>("MobTimer").Stop();
 			GetNode<Timer>("ScoreTimer").Stop();
+			GetNode<HUD>("HUD").ShowGameOver();
 		}
 
 		public void NewGame()
 		{
+			GetTree().CallGroup("mobs", Node.MethodName.QueueFree);
 			_score = 0;
 
 			var player = GetNode<Player>("Player");
@@ -27,24 +28,29 @@ namespace Test_project.scripts{
 			player.Start(startPosition.Position);
 
 			GetNode<Timer>("StartTimer").Start();
+			
+			var hud = GetNode<HUD>("HUD");
+			hud.UpdateScore(_score);
+			hud.ShowMessage("Get Ready!");
 		}
 
 		// We also specified this function name in PascalCase in the editor's connection window.
 		private void OnScoreTimerTimeout()
 		{
 			_score++;
-			GD.Print("SCORE: " + _score);
+			GetNode<HUD>("HUD").UpdateScore(_score);
+			GetNode<HUD>("HUD").ShowMessage("");
 		}
 
 		// We also specified this function name in PascalCase in the editor's connection window.
 		private void OnStartTimerTimeout()
 		{
+			GetNode<HUD>("HUD").ShowMessage("");
 			GetNode<Timer>("MobTimer").Start();
 			GetNode<Timer>("ScoreTimer").Start();
 		}
 
 		private void OnMobTimerTimeout(){
-			GD.Print("MOB TIMER TIMEOUT");
 			// Create a new instance of the Mob scene.
 			Mob mob = MobScene.Instantiate<Mob>();
 

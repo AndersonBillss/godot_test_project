@@ -3,10 +3,12 @@
 [ext_resource type="FontFile" uid="uid://b7oerryv3asin" path="res://fonts/Xolonium-Regular.ttf" id="1_tgyfa"]
 [ext_resource type="Script" path="res://scripts/HUD.cs" id="2_suxss"]
 
-[sub_resource type="InputEventKey" id="InputEventKey_pd8j6"]
+[sub_resource type="InputEventKey" id="InputEventKey_rikwv"]
+device = -1
+keycode = 4194309
 
 [sub_resource type="Shortcut" id="Shortcut_mry5g"]
-events = [SubResource("InputEventKey_pd8j6")]
+events = [SubResource("InputEventKey_rikwv")]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("2_suxss")

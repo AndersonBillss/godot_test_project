@@ -84,7 +84,7 @@ namespace Test_project.scripts{
 			Hide(); // Player disappears after being hit.
 			EmitSignal(SignalName.Hit);
 			// Must be deferred as we can't change physics properties on a physics callback.
-			GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+			GetNode<CollisionShape2D>("CollisionShape2D2").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		}
 	}
 }
